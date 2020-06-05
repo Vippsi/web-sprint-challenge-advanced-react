@@ -19,7 +19,7 @@ test("form shows success message on submit with form details", () => {
     const cityInput = screen.getByLabelText(/city/i)
     const stateInput = screen.getByLabelText(/state/i)
     const zipInput = screen.getByLabelText(/zip/i)
-    const success =  screen.findByTestId(/successMessage/)
+    const button = screen.getByText('Checkout')
     
 
     fireEvent.change(firstNameInput, { target: { value: 'Jonathan' } })
@@ -28,10 +28,11 @@ test("form shows success message on submit with form details", () => {
     fireEvent.change(cityInput, { target: { value: 'Eugene' } })
     fireEvent.change(stateInput, { target: { value: 'Oregon' } })
     fireEvent.change(zipInput, { target: { value: '97404' } })
-
+   
+    fireEvent.click(button)
     
-
+    const success =  screen.getByTestId(/successMessage/)
     
-
+    expect(success).toBeInTheDocument()
     
 });
